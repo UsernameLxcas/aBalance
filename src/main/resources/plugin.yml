@@ -1,0 +1,15 @@
+name: Start
+version: '${project.version}'
+main: utils.Start
+api-version: 1.18
+authors: [ Anytown ]
+description: Economy plugin
+website: https://github.com/Anytown
+
+commands:
+  balance:
+    usage: /balance
+    description: balance Command
+  bal:
+    usage: /bal
+    description: bal Command

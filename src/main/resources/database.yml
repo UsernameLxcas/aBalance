@@ -1,0 +1,8 @@
+#Storage options: MySQL, None
+Storage: 'None'
+
+#IF STORAGE IS 'MYSQL':
+host: 'localhost'
+password: '1234'
+database: 'AnyEconomy'
+user: 'root'
