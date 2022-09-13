@@ -18,14 +18,12 @@ public class economy implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if(sender.hasPermission("anybalance.balance")) {
-            if(args.length==0) {
                 if(sender instanceof Player) {
                     Player player = (Player) sender;
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(player, Start.getPlugin().getMessages().getString("Coins"))));
                 }else {
                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Start.getPlugin().getMessages().getString("Console")));
                 }
-            }
         }else {
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Start.getPlugin().getMessages().getString("No_Permission")));
         }
