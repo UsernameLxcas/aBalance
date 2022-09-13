@@ -27,10 +27,16 @@ public class eco implements CommandExecutor {
     }
 
     public String getStorage() {
+        return Start.getPlugin().getDatabase().getString("Storage");
+
+    }
+
+    public String getStorageMethod() {
         return ChatColor.translateAlternateColorCodes('&', "&eAnyBalance is currently running with:\n" +
                 "&b"+Start.getPlugin().getDatabase().getString("Storage"));
 
     }
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
@@ -101,7 +107,7 @@ public class eco implements CommandExecutor {
                         }
                         break;
                     case "storage":
-                        sender.sendMessage(getStorage());
+                        sender.sendMessage(getStorageMethod());
                         break;
                     case "reload":
                         Start.getPlugin().reloadConfig();
