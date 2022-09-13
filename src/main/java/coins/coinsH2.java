@@ -28,8 +28,8 @@ public class coinsH2 {
                                 e.printStackTrace();
                         }
                         YamlConfiguration playerconfig = YamlConfiguration.loadConfiguration(playerfile);
-                        playerconfig.set("User:", player.getName());
-                        playerconfig.set("Balance:", 500);
+                        playerconfig.set("User", player.getName());
+                        playerconfig.set("Balance", 500);
 
                         try {
                                 playerconfig.save(playerfile);
