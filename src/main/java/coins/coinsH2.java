@@ -1,5 +1,6 @@
 package coins;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import utils.Start;
@@ -53,6 +54,42 @@ public class coinsH2 {
                 YamlConfiguration playerconfig = YamlConfiguration.loadConfiguration(users);
                 return playerconfig.getInt("Balance")+"";
         }
+
+        public static void setCoins(Player player, int amount) {
+                File users = getPlayer(player);
+                YamlConfiguration playerconfig = YamlConfiguration.loadConfiguration(users);
+                playerconfig.set("Balance", amount);
+                try {
+                        playerconfig.save(users);
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+        }
+
+        public static boolean removeCoins(Player player, int amount) {
+                File users = getPlayer(player);
+                int coins = Integer.parseInt(getAmount(player));
+                int newcoins = coins - amount;
+
+                if(amount>coins) {
+                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', Start.getPlugin().getMessages().getString("No_Sufficient_Coins")));
+                     return false;
+                }else {
+                     YamlConfiguration playerconfig = YamlConfiguration.loadConfiguration(users);
+                     playerconfig.set("Balance", newcoins);
+                        try {
+                                playerconfig.save(users);
+                        } catch (IOException e) {
+                                e.printStackTrace();
+                        }
+                     return true;
+                }
+
+        }
+
+
+
+
 
 
 

@@ -5,4 +5,6 @@ Coins: '&eYou have &c%anyeconomy_balance% &ecoins!'
 Coins_Other: '&e%second_player% has &c%second_playercoins% &ecoins'
 Removed_Coins: '&eSuccess removed &c%second_playercoins% &efrom %second_player%'
 Added_Coins: '&eSuccess added &c%second_playercoins% &eto %second_player% balance'
-Reset_Coins: '&eYou setted %second_playercoins% &ebalance to &c%default_coins%'
+Reset_Coins: '&eYou setted %second_player% balance to &c%default_coins%'
+
+reload: '&eAnyBalance has been reloaded'
