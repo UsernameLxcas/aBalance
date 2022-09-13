@@ -4,6 +4,7 @@ import coins.Messages;
 import coins.coins;
 import coins.coinsH2;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
@@ -16,7 +17,7 @@ public class ecoGive {
     Connection connection = Start.getPlugin().getSQL();
 
 
-    public static void giveBalance(@Nullable Connection connection, Player player, CommandSender sender, String args[]) {
+    public static void giveBalance(@Nullable Connection connection, OfflinePlayer player, CommandSender sender, String args[]) {
         int amount = Integer.parseInt(args[2]);
         if(Messages.getStorage().equalsIgnoreCase("None")) {
             int oldcoins = Integer.parseInt(coinsH2.getAmount(player));
@@ -29,14 +30,23 @@ public class ecoGive {
 
     }
 
-    public static void checkUser(@Nullable Connection connection, Player player, CommandSender sender, String args[]) {
-        if(player == null) {
+    public static void checkUser(@Nullable Connection connection, OfflinePlayer player, CommandSender sender, String args[]) {
+        if(player == null || player.getName() == null) {
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Start.getPlugin().getMessages().getString("Not_Player")));
         }else {
             if(Messages.getStorage().equalsIgnoreCase("MySQL")) {
-                giveBalance(connection, player, sender, args);
+                if(coins.playerexist(connection, player.getUniqueId()) && player != null) {
+                    giveBalance(connection, player, sender, args);
+                }else {
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Start.getPlugin().getMessages().getString("Not_Player")));
+                }
             }else if(Messages.getStorage().equalsIgnoreCase("None")) {
-                giveBalance(null, player, sender, args);
+                if(coinsH2.playerExist(player)) {
+                    giveBalance(null, player, sender, args);
+                }else {
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Start.getPlugin().getMessages().getString("Not_Player")));
+                }
+
             }
         }
     }

@@ -2,7 +2,9 @@ package coins.Command;
 
 import coins.coins;
 import coins.coinsH2;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +16,7 @@ public class ecoGet {
 
     Connection connection = Start.getPlugin().getSQL();
 
-    public static void getPlayer(@Nullable Connection connection, Player player, CommandSender sender) {
+    public static void getPlayer(@Nullable Connection connection, OfflinePlayer player, CommandSender sender) {
         if (Messages.getStorage().equalsIgnoreCase("None")) {
             int coinsz = Integer.parseInt(coinsH2.getAmount(player));
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Start.getPlugin().getMessages().getString("Coins_Other").replace("%second_player%", player.getName()).replace("%second_playercoins%", coinsz+"")));
@@ -24,15 +26,23 @@ public class ecoGet {
         }
     }
 
-    public static void checkUser(@Nullable Connection connection, Player player, CommandSender sender, String args[]) {
-        if(player == null) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Start.getPlugin().getMessages().getString("Not_Player")));
-        }else {
+    public static void checkUser(@Nullable Connection connection, OfflinePlayer player, CommandSender sender, String args[]) {
+
+
             if(Messages.getStorage().equalsIgnoreCase("MySQL")) {
-                getPlayer(connection, player, sender);
+                if(coins.playerexist(connection, player.getUniqueId()) && player != null) {
+                    getPlayer(connection, player, sender);
+                }else {
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Start.getPlugin().getMessages().getString("Not_Player")));
+                }
+
             }else if(Messages.getStorage().equalsIgnoreCase("None")) {
-                getPlayer(null, player, sender);
-            }
+                if(coinsH2.playerExist(player)) {
+                    getPlayer(null, player, sender);
+                }else {
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Start.getPlugin().getMessages().getString("Not_Player")));
+                }
+
         }
     }
 

@@ -3,6 +3,7 @@ package coins.Command;
 import coins.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -42,7 +43,7 @@ public class eco implements CommandExecutor {
                         if(args.length!=3) {
                             sender.sendMessage(Messages.getUsage());
                         }else {
-                            Player player = Bukkit.getPlayer(args[1]);
+                            OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
                             if(getStorage().equalsIgnoreCase("MySQL")) {
                                 ecoGive.checkUser(connection, player, sender, args);
                             }else if(getStorage().equalsIgnoreCase("None")) {
@@ -54,7 +55,7 @@ public class eco implements CommandExecutor {
                         if(args.length!=3) {
                             sender.sendMessage(Messages.getUsage());
                         }else {
-                            Player player = Bukkit.getPlayer(args[1]);
+                            OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
                             if(getStorage().equalsIgnoreCase("MySQL")) {
                                 ecoRemove.checkUser(connection, player, sender, args);
                             }else if(getStorage().equalsIgnoreCase("None")) {
@@ -67,19 +68,20 @@ public class eco implements CommandExecutor {
                         if(args.length!=2) {
                             sender.sendMessage(Messages.getUsage());
                         }else {
-                            Player player = Bukkit.getPlayer(args[1]);
-                            if(getStorage().equalsIgnoreCase("MySQL")) {
-                                ecoGet.checkUser(connection, player, sender, args);
-                            }else if(getStorage().equalsIgnoreCase("None")) {
-                                ecoGet.checkUser(null, player, sender, args);
+                            OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
+                                if(getStorage().equalsIgnoreCase("MySQL")) {
+                                    ecoGet.checkUser(connection, player, sender, args);
+                                }else if(getStorage().equalsIgnoreCase("None")) {
+                                    ecoGet.checkUser(null, player, sender, args);
                             }
+
                         }
                         break;
                     case "reset":
                         if(args.length!=2) {
                             sender.sendMessage(Messages.getUsage());
                         }else {
-                            Player player = Bukkit.getPlayer(args[1]);
+                            OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
                             if (getStorage().equalsIgnoreCase("MySQL")) {
                                 ecoReset.checkUser(connection, player, sender, args);
                             } else if (getStorage().equalsIgnoreCase("None")) {
