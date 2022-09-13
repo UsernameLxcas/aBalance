@@ -29,7 +29,7 @@ public class coinsH2 {
                         }
                         YamlConfiguration playerconfig = YamlConfiguration.loadConfiguration(playerfile);
                         playerconfig.set("User", player.getName());
-                        playerconfig.set("Balance", 500);
+                        playerconfig.set("Balance", Start.getPlugin().getConfig().getInt("Starter_Coins"));
 
                         try {
                                 playerconfig.save(playerfile);

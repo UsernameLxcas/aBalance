@@ -1,5 +1,6 @@
 package utils;
 
+import coins.Command.eco;
 import mysqlutils.MySQLConnection;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -26,6 +27,7 @@ public final class Start extends JavaPlugin {
         plugin = this;
         MinecraftCommands();
         Messages();
+        Configuracion();
         Database();
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new placeholders().register();
@@ -48,6 +50,7 @@ public final class Start extends JavaPlugin {
     public void MinecraftCommands() {
         this.getCommand("balance").setExecutor(new economy());
         this.getCommand("bal").setExecutor(new economy());
+        this.getCommand("eco").setExecutor(new eco());
     }
 
     public Connection getSQL() {
@@ -92,6 +95,15 @@ public final class Start extends JavaPlugin {
 
     public FileConfiguration getDatabase() {
         return this.database;
+    }
+
+    public void Configuracion() {
+        File config = new File(this.getDataFolder(),"config.yml");
+        String carpeta = config.getPath();
+        if(!config.exists()){
+            this.getConfig().options().copyDefaults(true);
+            saveDefaultConfig();
+        }
     }
 
 }

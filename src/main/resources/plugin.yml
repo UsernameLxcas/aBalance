@@ -1,4 +1,4 @@
-name: Start
+name: AnyBalance
 version: '${project.version}'
 main: utils.Start
 api-version: 1.18
@@ -13,3 +13,6 @@ commands:
   bal:
     usage: /bal
     description: bal Command
+  eco:
+    usage: /eco
+    description: eco Command

@@ -30,7 +30,7 @@ public class coins {
         return 0;
     }
 
-    public void setCoins(@Nullable Connection connection, String player, int amount) {
+    public static void setCoins(@Nullable Connection connection, String player, int amount) {
         try {
             PreparedStatement statement = connection.prepareStatement("UPDATE users SET coins=(?) WHERE player=(?)");
             statement.setInt(1, amount);
@@ -42,7 +42,7 @@ public class coins {
 
     }
 
-    public void removeCoins(@Nullable Connection connection, String player, int amount) {
+    public static void removeCoins(@Nullable Connection connection, String player, int amount) {
         try {
             int coins = getCoins(connection, player);
             int newcoins = coins - amount;
@@ -78,9 +78,10 @@ public class coins {
     public static void giveCoinsOnJoin(Connection connection,String nombre,UUID uuid) {
         try {
             if(!playerexist(connection, uuid)) {
-                PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUE (?,?,'500')");
+                PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUE (?,?,?)");
                 statement.setString(1, uuid.toString());
                 statement.setString(2, nombre);
+                statement.setInt(3, Start.getPlugin().getConfig().getInt("Starter_Coins"));
                 statement.executeUpdate();
             }
 
