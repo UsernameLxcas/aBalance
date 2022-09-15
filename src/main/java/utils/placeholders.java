@@ -60,22 +60,3 @@ public class placeholders extends PlaceholderExpansion {
         return "Error";
     }
 }
-
-
-/*
-* switch (Start.getPlugin().getDatabase().getString("Storage")) {
-                case "none":
-                    return coinsH2.getPlayer(player)+"";
-                    break;
-                case "MySQL":
-                    if(Start.getPlugin().getSQL() == null) {
-                        return ChatColor.translateAlternateColorCodes('&', "&cNo databases found");
-                    }else {
-                        return coins.getCoins(Start.getPlugin().getSQL(), player.getName())+"";
-                    }
-                    break;
-                default:
-                    Bukkit.shutdown();
-                    break;
-            }
-* */

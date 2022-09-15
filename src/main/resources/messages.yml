@@ -7,5 +7,6 @@ Removed_Coins: '&eSuccess removed &c%second_playercoins% &efrom %second_player%'
 Added_Coins: '&eSuccess added &c%second_playercoins% &eto %second_player% balance'
 Reset_Coins: '&eYou setted %second_player% balance to &c%default_coins%'
 Not_Player: '&cThis player were not found'
+NoValid_Number: '&cYou must put a valid number'
 
 reload: '&eAnyBalance has been reloaded'

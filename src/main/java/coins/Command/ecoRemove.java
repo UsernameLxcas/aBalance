@@ -17,6 +17,7 @@ public class ecoRemove {
     Connection connection = Start.getPlugin().getSQL();
 
     public static void removeCoins(@Nullable Connection connection, OfflinePlayer player, CommandSender sender, String args[]) {
+        try {
         int amount = Integer.parseInt(args[2]);
         if (Messages.getStorage().equalsIgnoreCase("None")) {
             if(coinsH2.removeCoins(player, amount)) {
@@ -25,6 +26,9 @@ public class ecoRemove {
         } else if (Messages.getStorage().equalsIgnoreCase("MySQL")) {
             coins.removeCoins(connection, player.getName(),amount);
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Start.getPlugin().getMessages().getString("Removed_Coins").replace("%second_player%", player.getName()).replace("%second_playercoins%", amount+"")));
+        }
+        } catch (NumberFormatException e) {
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Start.getPlugin().getMessages().getString("NoValid_Number")));
         }
     }
 

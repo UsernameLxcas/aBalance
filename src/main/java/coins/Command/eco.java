@@ -20,11 +20,6 @@ public class eco implements CommandExecutor {
 
     Connection connection = Start.getPlugin().getSQL();
 
-    public String getStorage() {
-        return Start.getPlugin().getDatabase().getString("Storage");
-
-    }
-
     public String getStorageMethod() {
         return ChatColor.translateAlternateColorCodes('&', "&eAnyBalance is currently running with:\n" +
                 "&b"+Start.getPlugin().getDatabase().getString("Storage"));
@@ -44,9 +39,9 @@ public class eco implements CommandExecutor {
                             sender.sendMessage(Messages.getUsage());
                         }else {
                             OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
-                            if(getStorage().equalsIgnoreCase("MySQL")) {
+                            if(Messages.getStorage().equalsIgnoreCase("MySQL")) {
                                 ecoGive.checkUser(connection, player, sender, args);
-                            }else if(getStorage().equalsIgnoreCase("None")) {
+                            }else if(Messages.getStorage().equalsIgnoreCase("None")) {
                                 ecoGive.checkUser(null, player, sender, args);
                             }
                         }
@@ -56,9 +51,9 @@ public class eco implements CommandExecutor {
                             sender.sendMessage(Messages.getUsage());
                         }else {
                             OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
-                            if(getStorage().equalsIgnoreCase("MySQL")) {
+                            if(Messages.getStorage().equalsIgnoreCase("MySQL")) {
                                 ecoRemove.checkUser(connection, player, sender, args);
-                            }else if(getStorage().equalsIgnoreCase("None")) {
+                            }else if(Messages.getStorage().equalsIgnoreCase("None")) {
                                 ecoRemove.checkUser(null, player, sender, args);
                             }
 
@@ -69,9 +64,9 @@ public class eco implements CommandExecutor {
                             sender.sendMessage(Messages.getUsage());
                         }else {
                             OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
-                                if(getStorage().equalsIgnoreCase("MySQL")) {
+                                if(Messages.getStorage().equalsIgnoreCase("MySQL")) {
                                     ecoGet.checkUser(connection, player, sender, args);
-                                }else if(getStorage().equalsIgnoreCase("None")) {
+                                }else if(Messages.getStorage().equalsIgnoreCase("None")) {
                                     ecoGet.checkUser(null, player, sender, args);
                             }
 
@@ -82,9 +77,9 @@ public class eco implements CommandExecutor {
                             sender.sendMessage(Messages.getUsage());
                         }else {
                             OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
-                            if (getStorage().equalsIgnoreCase("MySQL")) {
+                            if (Messages.getStorage().equalsIgnoreCase("MySQL")) {
                                 ecoReset.checkUser(connection, player, sender, args);
-                            } else if (getStorage().equalsIgnoreCase("None")) {
+                            } else if (Messages.getStorage().equalsIgnoreCase("None")) {
                                 ecoReset.checkUser(null, player, sender, args);
                             }
                         }

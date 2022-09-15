@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 import utils.Start;
 
+import java.io.IOException;
 import java.sql.Connection;
 
 public class ecoGive {
@@ -18,16 +19,19 @@ public class ecoGive {
 
 
     public static void giveBalance(@Nullable Connection connection, OfflinePlayer player, CommandSender sender, String args[]) {
-        int amount = Integer.parseInt(args[2]);
-        if(Messages.getStorage().equalsIgnoreCase("None")) {
-            int oldcoins = Integer.parseInt(coinsH2.getAmount(player));
-            coinsH2.setCoins(player, oldcoins+amount);
-        }else if(Messages.getStorage().equalsIgnoreCase("MySQL")) {
-            int oldcoins = coins.getCoins(connection, player.getName());
-            coins.setCoins(connection, player.getName(), oldcoins+amount);
+        try {
+            int amount = Integer.valueOf(args[2]);
+            if (Messages.getStorage().equalsIgnoreCase("None")) {
+                int oldcoins = Integer.parseInt(coinsH2.getAmount(player));
+                coinsH2.setCoins(player, oldcoins + amount);
+            } else if (Messages.getStorage().equalsIgnoreCase("MySQL")) {
+                int oldcoins = coins.getCoins(connection, player.getName());
+                coins.setCoins(connection, player.getName(), oldcoins + amount);
+            }
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Start.getPlugin().getMessages().getString("Added_Coins").replace("%second_player%", player.getName()).replace("%second_playercoins%", amount + "")));
+        } catch (NumberFormatException e) {
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Start.getPlugin().getMessages().getString("NoValid_Number")));
         }
-        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Start.getPlugin().getMessages().getString("Added_Coins").replace("%second_player%", player.getName()).replace("%second_playercoins%", amount+"")));
-
     }
 
     public static void checkUser(@Nullable Connection connection, OfflinePlayer player, CommandSender sender, String args[]) {
