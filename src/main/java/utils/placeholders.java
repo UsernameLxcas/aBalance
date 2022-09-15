@@ -27,7 +27,7 @@ public class placeholders extends PlaceholderExpansion {
 
     @Override
     public String getIdentifier(){
-        return "anyeconomy";
+        return "anybalance";
     }
 
     @Override
